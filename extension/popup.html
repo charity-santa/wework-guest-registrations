@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/quick_invitation.css">
+  <title>Quick Guest Invitation(WeWork)</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <h3>Quick Guest Invitation</h3>
+    <p id='js-message' class="alert" style="display:none"></p>
+    <div id="js-host-form-app" style="display:none">
+      <input type="text" id="encryptedUserId" class="form-control">
+      <input type="text" id="location" class="form-control">
+    </div>
+
+    <p id="js-hello-message" style="display:none"></p>
+    <form id="js-guest-form-app" style="display:none">
+      <label for="firstName" class="col-form-label">FirstName</label>
+      <input type="text" id="firstName" name="firstName" class="form-control">
+
+      <label for="lastName" class="col-form-label">LastName</label>
+      <input type="text" id="lastName" name="lastName" class="form-control">
+
+      <label for="email" class="col-form-label">email</label>
+      <input type="text" id="email" name="email" class="form-control">
+
+      <label for="dateOfVisit" class="col-form-label">Time</label>
+      <input type="text" id="dateOfVisit" name="dateOfVisit" class="form-control">
+
+      <br />
+      <button type="button" id="updateGuestInfoButton" class="btn btn-lg btn-danger">Sent Invitation</button>
+    </form>
+    <br />
+    <a href="https://form.run/@feedback">　feedback?</a>
+  </div>
+
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/popup.js"></script>
+
+</body>
+</html>
