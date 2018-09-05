@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>quick invitation</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col offset-1 pt-5">
+          <form id="js-invitation-app">
+            <div class="row">
+              <h3 class="col-2">Guest Invitation Registration</h3>
+            </div>
+
+            <div class="row pt-3">
+              <div class="col-5">
+                <div class="form-contents striped-form-row">
+                  <h3>Host</h3>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="companyName" class="col-form-label">USERID</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="encrxyptedUserId" name="encryptedUserId" class="form-control" :class="{'is-invalid': errors.encryptedUserId}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="companyName" class="col-form-label">Location</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="location" name="location" v-if="isEdit" v-model="host.location" class="form-control" :class="{'is-invalid': errors.lcoation}">
+                    </div>
+                  </div>
+                  <h3>Guest</h3>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="companyName" class="col-form-label">LastName</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="lastName" name="lastName" v-if="isEdit" v-model="guest.lastName" class="form-control" :class="{'is-invalid': errors.lastName}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="companyName" class="col-form-label">FirstName</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="firstName" name="firstName" v-if="isEdit" v-model="guest.firstName" class="form-control" :class="{'is-invalid': errors.firstName}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="email" class="col-form-label">email</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="firstName" name="email" v-if="isEdit" v-model="guest.email" class="form-control" :class="{'is-invalid': errors.email}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-3">
+                      <label for="companyName" class="col-form-label">Time</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="dateOfVisit" name="dateOfVisit" v-if="isEdit" v-model="guest.dateOfVisit" class="form-control" :class="{'is-invalid': errors.dateOfVisit}">
+                    </div>
+                  </div>
+
+                  <div class="col-10">
+                    <button type="button" class="btn btn-danger" onClick="updateGuestinfo()">更新</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        const hostRepository = {
+          encryptedUserId: '',
+          location: '116e4926-5161-4af1-babe-04aede564197',
+        };
+
+        const guestRepository = {
+          lastName: 'kajinuma',
+          firstName: 'tsubasa',
+          email: 'chocopie116+123@gmail.com',
+          dateOfVisit: 'Wed Sep 07 2018 12:30:00 GMT+0000',
+        };
+
+        function getHostInfo() {
+          return Object.assign({}, hostRepository);
+        }
+
+        function getGuestInfo() {
+          return Object.assign({}, guestRepository);
+        }
+
+        function updateGuestinfo() {
+          const res = { status: 'OK', errors: {}};
+
+          const host = getHostInfo();
+          const guest = getGuestInfo();
+
+          const body = JSON.stringify({
+            first_name: guest.firstName,
+            last_name: guest.lastName,
+            location_uuid: host.location,
+            email: guest.email,
+            date_of_visit: guest.dateOfVisit,
+          });
+          const url = 'https://guest.wework.com/api/v4/guests';
+          $.ajax({
+            type: "post",
+            url: url,
+            data: body,
+            contentType: 'application/json',
+            dataType: "json",
+            headers: {
+              'ENCRYPTED_USER_UUID': host.encryptedUserId,
+              'Accept': 'application.json, text-plain,*/*',
+            },
+            success: function (json_data) {   // 200 OK時
+              alert('ok');
+              console.log(json_data);
+            },
+            error: function (err) {         // HTTPエラー時
+              console.error(err);
+              alert('ng');
+            },
+          });
+        }
+    </script>
+  </body>
+</html>
+
