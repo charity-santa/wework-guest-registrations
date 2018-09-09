@@ -1,3 +1,3 @@
 deploy:
 	mkdir -p ~/Desktop/deploy
-	cp -f * ~/Desktop/deploy
+	cp -rf * ~/Desktop/deploy
