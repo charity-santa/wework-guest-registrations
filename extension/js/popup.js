@@ -76,7 +76,8 @@ window.onload = () => {
 
         const dateOfVisit = $guestForm.find('#dateOfVisit').val();
 
-        if (!location || !encryptedUserId || !firstName || !lastName || !email || !dateOfVisit) {
+        //email is optinal
+        if (!location || !encryptedUserId || !firstName || !lastName || !dateOfVisit) {
             displayError($message, 'you should fill in guest information');
             return;
         }
