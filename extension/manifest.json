@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "WeWork guest registrations",
     "description": "Sending Invitation Easily and Quickly.",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "content_scripts": [
         {
             "matches": [
@@ -25,5 +25,5 @@
         "https://members.wework.com/*",
         "storage"
     ],
-    "content_security_policy": "script-src 'self'; object-src 'self'"
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }
