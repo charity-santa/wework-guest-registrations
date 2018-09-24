@@ -101,7 +101,31 @@ window.onload = () => {
         });
     }
 
-    function initializeForm($hostForm, $guestForm, hostRepository) {
+    // function updateBulkGuestInfo() {
+    //     const val= $('#js-bulk-guest-form').val();
+
+    //     const rows = val.split("\n");
+    //     const guests = [];
+
+    //     rows.map((row) => {
+    //         guests.push(createGuest(row));
+    //     });
+
+
+    //     console.log(guests);
+    // }
+
+    // function createGuest(inputRowString) {
+    //     //TSVのみサポート
+    //     const r = inputRowString.split('\t');
+    //     return {
+    //         "firstName": r[0],
+    //         "lastName": r[1],
+    //         "email": r[2],
+    //     }
+    // }
+
+    function initializeForm($hostForm, $guestForm, hostRepository, $bulkForm) {
         const storedValues = hostRepository.get();
         storedValues.then((values) => {
             $hostForm.find('#location').val(values.locationId)
@@ -123,7 +147,10 @@ window.onload = () => {
     const $guestForm = $('#js-guest-form-app');
     const $message = $('#js-message');
     const $helloMessage = $('#js-hello-message');
-    $('#updateGuestInfoButton').click(updateGuestInfo);
+    const $bulkForm = $('#js-bulk-guest-form');
 
-    initializeForm($hostForm, $guestForm, hostRepository);
+    $('#updateGuestInfoButton').click(updateGuestInfo);
+    // $('#updateBulkGuestInfoButton').click(updateBulkGuestInfo);
+
+    initializeForm($hostForm, $guestForm, hostRepository, $bulkForm);
 }

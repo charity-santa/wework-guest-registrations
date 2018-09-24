@@ -13,12 +13,13 @@
   <div class="container-fluid">
     <h3>Quick Guest Invitation</h3>
     <p id='js-message' class="alert" style="display:none"></p>
-    <div id="js-host-form-app" style="display:none">
-      <input type="text" id="encryptedUserId" class="form-control">
-      <input type="text" id="location" class="form-control">
+    <div id="js-host-form-app">
+      <input type="hidden" id="encryptedUserId">
+      <input type="hidden" id="location">
     </div>
 
     <p id="js-hello-message" style="display:none"></p>
+
     <form id="js-guest-form-app" style="display:none">
         <div class="form-group row">
           <label for="firstName" class="col-sm-2 col-form-label">FirstName</label>
@@ -53,6 +54,14 @@
       <a href="https://form.run/@feedback">　feedback?</a>
       </form>
     <br />
+
+    <!-- <form>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Bulk Invitation</label>
+          <textarea type="file" class="form-control-file" id="js-bulk-guest-form" rows="3" cols="40"></textarea>
+        </div>
+      <button type="button" id="updateBulkGuestInfoButton" class="btn btn-lg btn-danger">Sent Bulk Invitation</button>
+      </form> -->
   </div>
 
   <script src="js/jquery-3.2.1.min.js"></script>
