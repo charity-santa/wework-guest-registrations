@@ -3,7 +3,7 @@ module.exports = {
     app: "./src/index.tsx",
   },
   output: {
-    path: __dirname + "/__dist/",
+    path: __dirname + "/extension/js",
     filename: "bundle.js",
     sourceMapFilename: 'bundle.map.js'
   },
