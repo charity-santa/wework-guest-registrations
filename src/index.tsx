@@ -4,8 +4,8 @@ import * as ReactDOM from 'react-dom';
 class Index extends React.Component {
     render() {
         return (
-            <div className="container">
-                <p>OK</p>
+            <div className="container-fluid">
+                <h3>Quick Guest Invitation</h3>
             </div>
         );
     }
