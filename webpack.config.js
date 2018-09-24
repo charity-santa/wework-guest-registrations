@@ -1,12 +1,11 @@
 module.exports = {
   entry: {
-    guest: "./src/guest/index.tsx",
-    kanji: "./src/kanji/index.tsx",
+    app: "./src/index.tsx",
   },
   output: {
     path: __dirname + "/__dist/",
-    filename: "[name]/[name].bundle.js",
-    sourceMapFilename: '[name]/[name].bundle.map.js'
+    filename: "bundle.js",
+    sourceMapFilename: 'bundle.map.js'
   },
 
   // Enable sourcemaps for debugging webpack's output.

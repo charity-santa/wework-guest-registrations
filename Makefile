@@ -5,5 +5,5 @@ install:
 	yarn install
 
 
-build/dev:
+build:
 	./node_modules/.bin/webpack --mode development -w

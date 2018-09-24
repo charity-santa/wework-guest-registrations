@@ -9,10 +9,8 @@
   "dependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
-    "@types/react-router-dom": "^4.3.0",
     "option-t": "^18.0.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^4.3.1"
+    "react-dom": "^16.4.1"
   }
 }
