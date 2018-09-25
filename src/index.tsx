@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as moment from 'moment';
 import { HostRepository, GuestRepository } from './lib';
 
 
@@ -35,6 +36,8 @@ class Index extends React.Component<{}, State>{
     constructor(props: any) {
         super(props);
 
+
+        const defaultTimeStr = moment().add(1, 'days').format('YYYY/MM/DD HH:00');
         this.state = {
             notice: "",
             error: "",
@@ -48,7 +51,7 @@ class Index extends React.Component<{}, State>{
                 firstName: "",
                 lastName: "",
                 email: "",
-                dateOfVisit: ""
+                dateOfVisit: defaultTimeStr
             },
             isValidGuest: false,
         };
