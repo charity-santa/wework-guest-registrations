@@ -12,6 +12,12 @@ interface State {
         locationName: string,
         userName: string,
     },
+    guest: {
+        firstName: string,
+        lastName: string,
+        email: string,
+        dateOfVisit: string,
+    }
 };
 
 interface StoredHost {
@@ -36,12 +42,23 @@ class Index extends React.Component<{}, State>{
                 locationId: "",
                 locationName: "",
                 userName: "",
+            },
+            guest: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                dateOfVisit: ""
             }
         };
 
         //TODO injection
         this.hostRepository = new HostRepository();
         this.guestRepository = new GuestRepository();
+
+
+        //https://qiita.com/konojunya/items/fc0cfa6a56821e709065
+        this.handleChange = this.handleChange.bind(this);
+        this.registerGuest 　= this.registerGuest.bind(this);
     }
     componentDidMount() {
         this.hostRepository.get().then((host: StoredHost) => {
@@ -58,6 +75,32 @@ class Index extends React.Component<{}, State>{
                 error: 'Please login at https://members.wework.com'
             });
         });
+    }
+
+    registerGuest() {
+        console.log(this.state.guest);
+    }
+    handleChange(e: any) {
+        let guest = this.state.guest;
+
+        switch (e.target.name) {
+            case "firstName":
+                guest.firstName = e.target.value;
+                break;
+            case "lastName":
+                guest.lastName = e.target.value;
+                break;
+            case "email":
+                guest.email = e.target.value;
+                break;
+            case "dateOfVisit":
+                guest.dateOfVisit = e.target.value;
+                break;
+        }
+        this.setState({
+            guest: guest
+        });
+
     }
 
     render() {
@@ -77,33 +120,33 @@ class Index extends React.Component<{}, State>{
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">FirstName</label>
                     <div className="col-sm-10">
-                        <input type="text" id="firstName" name="firstName" className="form-control" />
+                        <input type="text" name="firstName" onChange={this.handleChange} value={this.state.guest.firstName} className="form-control" />
                     </div>
                 </div>
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">LastName</label>
                     <div className="col-sm-10">
-                        <input type="text" id="lastName" name="lastName" className="form-control" />
+                        <input type="text" name="lastName" onChange={this.handleChange} value={this.state.guest.lastName} className="form-control" />
                     </div>
                 </div>
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">email</label>
                     <div className="col-sm-10">
-                        <input type="text" id="email" name="email" className="form-control" />
+                        <input type="text" name="email" onChange={this.handleChange} value={this.state.guest.email} className="form-control" />
                     </div>
                 </div>
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">ArrivalTime</label>
                     <div className="col-sm-10">
-                        <input type="text" id="dateOfVisit" name="dateOfVisit" className="form-control" />
+                        <input type="text" name="dateOfVisit" onChange={this.handleChange} value={this.state.guest.dateOfVisit} className="form-control" />
                     </div>
                 </div>
 
                 <br />
-                <button type="button" id="updateGuestInfoButton" className="btn btn-lg btn-danger">Sent Invitation</button>
+                <button type="button" onClick={this.registerGuest} className="btn btn-lg btn-danger">Sent Invitation</button>
                 <a href="https://form.run/@feedback">　feedback?</a>
             </div>
         );
