@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as moment from 'moment';
+import * as ReactGA from 'react-ga'
+
 import { HostRepository, GuestRepository } from './lib';
 
 
@@ -28,6 +30,8 @@ interface StoredHost {
     locationName: string;
     userName: string;
 }
+
+
 
 class Index extends React.Component<{}, State>{
     private hostRepository: HostRepository;
@@ -66,6 +70,10 @@ class Index extends React.Component<{}, State>{
         this.registerGuest = this.registerGuest.bind(this);
     }
     componentDidMount() {
+        ReactGA.initialize('UA-121866338-3');
+        const ga = ReactGA.ga();
+        ga('send', 'pageview', 'popup.html');
+
         this.hostRepository.get().then((host: StoredHost) => {
             this.setState({
                 host: {
@@ -83,6 +91,12 @@ class Index extends React.Component<{}, State>{
     }
 
     registerGuest() {
+        ReactGA.event({
+            category: 'Social',
+            action: 'Rated an App',
+            value: 3
+        });
+
         const h = this.state.host;
         const g = this.state.guest;
         const result = this.guestRepository.put(
@@ -130,7 +144,7 @@ class Index extends React.Component<{}, State>{
     }
 
     isValidGuest(g: any): boolean {
-        return g.firstName && g.lastName && g.email && g.dateOfVisit;
+        return g.firstName && g.lastName && g.dateOfVisit;
     }
 
     render() {
@@ -176,7 +190,7 @@ class Index extends React.Component<{}, State>{
                 </div>
 
                 <br />
-                <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger">Sent Invitation</button>
+                <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger" id="updateGuestInfoButton">Sent Invitation</button>
                 <a href="https://form.run/@feedback">　feedback?</a>
             </div>
         );
