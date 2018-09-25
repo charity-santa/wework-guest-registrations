@@ -17,7 +17,8 @@ interface State {
         lastName: string,
         email: string,
         dateOfVisit: string,
-    }
+    },
+    isValidGuest: boolean,
 };
 
 interface StoredHost {
@@ -48,7 +49,8 @@ class Index extends React.Component<{}, State>{
                 lastName: "",
                 email: "",
                 dateOfVisit: ""
-            }
+            },
+            isValidGuest: false,
         };
 
         //TODO injection
@@ -58,7 +60,7 @@ class Index extends React.Component<{}, State>{
 
         //https://qiita.com/konojunya/items/fc0cfa6a56821e709065
         this.handleChange = this.handleChange.bind(this);
-        this.registerGuest 　= this.registerGuest.bind(this);
+        this.registerGuest = this.registerGuest.bind(this);
     }
     componentDidMount() {
         this.hostRepository.get().then((host: StoredHost) => {
@@ -97,10 +99,15 @@ class Index extends React.Component<{}, State>{
                 guest.dateOfVisit = e.target.value;
                 break;
         }
-        this.setState({
-            guest: guest
-        });
 
+        this.setState({
+            guest: guest,
+            isValidGuest: this.isValidGuest(guest)
+        });
+    }
+
+    isValidGuest(g: any): boolean {
+        return g.firstName && g.lastName && g.email && g.dateOfVisit;
     }
 
     render() {
@@ -146,7 +153,7 @@ class Index extends React.Component<{}, State>{
                 </div>
 
                 <br />
-                <button type="button" onClick={this.registerGuest} className="btn btn-lg btn-danger">Sent Invitation</button>
+                <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger">Sent Invitation</button>
                 <a href="https://form.run/@feedback">　feedback?</a>
             </div>
         );
