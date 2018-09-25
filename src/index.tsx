@@ -94,14 +94,12 @@ class Index extends React.Component<{}, State>{
             moment(g.dateOfVisit, 'YYYY/MM/DD HH:mm').toString()
         );
 
-        result.then((response) => {
-            console.log(response);
-            // displaySuccess($message, 'completed sending invitation to ' + firstName);
+        result.then((_response) => {
             this.setState({
                 notice: 'Completed sending invitation to ' + this.state.guest.firstName
             })
-        }).catch((err) => {
-            console.log(err);
+        }).catch((_err) => {
+            console.error(_err);
             this.setState({
                 error: 'Oops! Something went wrong...'
             })

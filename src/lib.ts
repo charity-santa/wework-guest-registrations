@@ -40,7 +40,12 @@ export class GuestRepository {
             body: JSON.stringify(invitation)
         }
 
-        //TODO 雑handling改善
-        return fetch(url, option);
+        return fetch(url, option).then((response) => {
+            if (200 <= response.status && response.status < 300) {
+                return Promise.resolve(response);
+            }
+
+            return Promise.reject(response);
+        });
     }
 }
