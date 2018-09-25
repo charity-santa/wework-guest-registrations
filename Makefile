@@ -5,7 +5,7 @@ install:
 	yarn install
 
 build:
-	./node_modules/.bin/webpack --mode production -w
+	./node_modules/.bin/webpack --mode production
 
 build/dev:
 	./node_modules/.bin/webpack --mode development -w
