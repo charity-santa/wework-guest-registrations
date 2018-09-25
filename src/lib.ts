@@ -20,34 +20,27 @@ export class GuestRepository {
         lastName: string,
         email: string,
         dateOfVisit: string
-    ) {
-        // return new Promise((resolve, reject) => {
-        //     const invitation = {
-        //         first_name: firstName,
-        //         last_name: lastName,
-        //         location_uuid: location,
-        //         email: email,
-        //         date_of_visit: dateOfVisit,
-        //     };
-        //     const body = JSON.stringify(invitation);
+    ): Promise<Response> {
+        const invitation = {
+            first_name: firstName,
+            last_name: lastName,
+            location_uuid: location,
+            email: email,
+            date_of_visit: dateOfVisit,
+        };
 
-        //     const url = 'https://guest.wework.com/api/v4/guests';
-        //     $.ajax({
-        //         type: "post",
-        //         url: url,
-        //         data: body,
-        //         contentType: 'application/json',
-        //         dataType: "json",
-        //         headers: {
-        //             'ENCRYPTED_USER_UUID': encryptedUserId,
-        //             'Accept': 'application/json, text-plain,*/*',
-        //         }, success: function () {
-        //             resolve();
-        //         },
-        //         error: function (xhr: any) {
-        //             reject(xhr.responseText);
-        //         },
-        //     });
-        // });
+        const url = 'https://guest.wework.com/api/v4/guests';
+        const option = {
+            method: 'POST',
+            headers: {
+                'ENCRYPTED_USER_UUID': encryptedUserId,
+                'Accept': 'application/json, text-plain,*/*',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(invitation)
+        }
+
+        //TODO 雑handling改善
+        return fetch(url, option);
     }
 }

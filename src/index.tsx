@@ -83,7 +83,29 @@ class Index extends React.Component<{}, State>{
     }
 
     registerGuest() {
-        console.log(this.state.guest);
+        const h = this.state.host;
+        const g = this.state.guest;
+        const result = this.guestRepository.put(
+            h.encryptedUserId,
+            h.locationId,
+            g.firstName,
+            g.lastName,
+            g.email,
+            moment(g.dateOfVisit, 'YYYY/MM/DD HH:mm').toString()
+        );
+
+        result.then((response) => {
+            console.log(response);
+            // displaySuccess($message, 'completed sending invitation to ' + firstName);
+            this.setState({
+                notice: 'Completed sending invitation to ' + this.state.guest.firstName
+            })
+        }).catch((err) => {
+            console.log(err);
+            this.setState({
+                error: 'Oops! Something went wrong...'
+            })
+        });
     }
     handleChange(e: any) {
         let guest = this.state.guest;
