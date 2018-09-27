@@ -109,8 +109,15 @@ class Index extends React.Component<{}, State>{
         );
 
         result.then((_response) => {
+            const g = this.state.guest;
+            const name = this.state.guest.firstName;
+            g.firstName = '';
+            g.lastName = '';
+            g.email = '';
+
             this.setState({
-                notice: 'Completed sending invitation to ' + this.state.guest.firstName
+                guest: g,
+                notice: 'Completed sending invitation to ' + name
             })
         }).catch((_err) => {
             console.error(_err);
