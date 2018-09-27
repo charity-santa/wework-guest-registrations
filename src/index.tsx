@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import * as moment from 'moment';
 import * as ReactGA from 'react-ga'
 
-import { HostRepository, GuestRepository } from './lib';
+import { HostRepository, GuestRepository, StoredHost } from './lib';
 
 
 interface State {
@@ -23,15 +23,6 @@ interface State {
     },
     isValidGuest: boolean,
 };
-
-interface StoredHost {
-    euuid: string;
-    locationId: string;
-    locationName: string;
-    userName: string;
-}
-
-
 
 class Index extends React.Component<{}, State>{
     private hostRepository: HostRepository;

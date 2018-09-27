@@ -1,5 +1,12 @@
+export interface StoredHost {
+    euuid: string;
+    locationId: string;
+    locationName: string;
+    userName: string;
+}
+
 export class HostRepository {
-    get() {
+    get(): Promise<StoredHost> {
         return new Promise((resolve, reject) => {
             chrome.storage.local.get('QUICKINVITATION', (values) => {
                 //{} is empty? (if not login => {})
