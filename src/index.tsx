@@ -169,6 +169,8 @@ class Index extends React.Component<{}, State>{
                             </div>
                         );
                     }
+                    const redStyle = { color: 'red', fontSize: '15px' };
+
 
                     return (
                         <div>
@@ -176,7 +178,7 @@ class Index extends React.Component<{}, State>{
                             <p><span style={{ color: 'red', fontSize: '15px' }}>{'※'}</span> means requirement</p>
                             <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
-                                    FirstName<span style={{ color: 'red', fontSize: '15px' }}>{'※'}</span>
+                                    FirstName<span style={redStyle}>{'※'}</span>
                                 </label>
                                 <div className="col-sm-10">
                                     <input type="text" name="firstName" onChange={this.handleChange} value={this.state.guest.firstName} className="form-control" />
@@ -185,7 +187,7 @@ class Index extends React.Component<{}, State>{
 
                             <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
-                                    LastName<span style={{ color: 'red', fontSize: '15px' }}>{'※'}</span>
+                                    LastName<span style={redStyle}>{'※'}</span>
                                 </label>
                                 <div className="col-sm-10">
                                     <input type="text" name="lastName" onChange={this.handleChange} value={this.state.guest.lastName} className="form-control" />
@@ -201,7 +203,7 @@ class Index extends React.Component<{}, State>{
 
                             <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
-                                    ArrivalTime<span style={{ color: 'red', fontSize: '15px' }}>{'※'}</span>
+                                    ArrivalTime<span style={redStyle}>{'※'}</span>
                                 </label>
                                 <div className="col-sm-10">
                                     <input type="text" name="dateOfVisit" onChange={this.handleChange} value={this.state.guest.dateOfVisit} className="form-control" />
