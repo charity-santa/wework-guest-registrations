@@ -22,6 +22,7 @@ interface State {
         dateOfVisit: string,
     },
     isValidGuest: boolean,
+    noSession: boolean,
 };
 
 class Index extends React.Component<{}, State>{
@@ -49,6 +50,7 @@ class Index extends React.Component<{}, State>{
                 dateOfVisit: defaultTimeStr
             },
             isValidGuest: false,
+            noSession: true,
         };
 
         //TODO injection
@@ -72,12 +74,11 @@ class Index extends React.Component<{}, State>{
                     locationId: host.locationId,
                     locationName: host.locationName,
                     userName: host.userName
-                }
+                },
+                noSession: false
             })
         }).catch(() => {
-            this.setState({
-                error: 'Please login at https://members.wework.com'
-            });
+            //login failure
         });
     }
 
@@ -159,36 +160,51 @@ class Index extends React.Component<{}, State>{
                 {error}
                 {hello}
 
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">FirstName</label>
-                    <div className="col-sm-10">
-                        <input type="text" name="firstName" onChange={this.handleChange} value={this.state.guest.firstName} className="form-control" />
-                    </div>
-                </div>
+                {(() => {
+                    if (this.state.noSession) {
+                        return (
+                            <div>
+                                <p className="alert alert-danger">Please Login. <a href="https://members.wework.com">https://members.wework.com</a></p>
+                            </div>
+                        );
+                    }
 
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">LastName</label>
-                    <div className="col-sm-10">
-                        <input type="text" name="lastName" onChange={this.handleChange} value={this.state.guest.lastName} className="form-control" />
-                    </div>
-                </div>
+                    return (
+                        <div>
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">FirstName</label>
+                                <div className="col-sm-10">
+                                    <input type="text" name="firstName" onChange={this.handleChange} value={this.state.guest.firstName} className="form-control" />
+                                </div>
+                            </div>
 
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">email</label>
-                    <div className="col-sm-10">
-                        <input type="text" name="email" onChange={this.handleChange} value={this.state.guest.email} className="form-control" />
-                    </div>
-                </div>
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">LastName</label>
+                                <div className="col-sm-10">
+                                    <input type="text" name="lastName" onChange={this.handleChange} value={this.state.guest.lastName} className="form-control" />
+                                </div>
+                            </div>
 
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">ArrivalTime</label>
-                    <div className="col-sm-10">
-                        <input type="text" name="dateOfVisit" onChange={this.handleChange} value={this.state.guest.dateOfVisit} className="form-control" />
-                    </div>
-                </div>
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">email</label>
+                                <div className="col-sm-10">
+                                    <input type="text" name="email" onChange={this.handleChange} value={this.state.guest.email} className="form-control" />
+                                </div>
+                            </div>
 
-                <br />
-                <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger" id="updateGuestInfoButton">Sent Invitation</button>
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">ArrivalTime</label>
+                                <div className="col-sm-10">
+                                    <input type="text" name="dateOfVisit" onChange={this.handleChange} value={this.state.guest.dateOfVisit} className="form-control" />
+                                </div>
+                            </div>
+
+                            <br />
+                            <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger" id="updateGuestInfoButton">Sent Invitation</button>
+                        </div>
+                    );
+                })()}
+
                 <a href="https://form.run/@feedback">　feedback?</a>
             </div>
         );
