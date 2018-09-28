@@ -21,6 +21,7 @@ interface State {
         email: string,
         dateOfVisit: string,
     },
+    bulkContent: string,
     isValidGuest: boolean,
     noSession: boolean,
 };
@@ -49,6 +50,7 @@ class Index extends React.Component<{}, State>{
                 email: "",
                 dateOfVisit: defaultTimeStr
             },
+            bulkContent: "",
             isValidGuest: false,
             noSession: true,
         };
@@ -175,6 +177,14 @@ class Index extends React.Component<{}, State>{
                     return (
                         <div>
                             <h4>Guest Information</h4>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                <label className="form-check-label">Simple Mode</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                <label className="form-check-label">Bulk Mode</label>
+                            </div>
                             <p><span style={{ color: 'red', fontSize: '15px' }}>{'※'}</span> means requirement</p>
                             <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
@@ -212,6 +222,31 @@ class Index extends React.Component<{}, State>{
 
                             <br />
                             <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger" id="updateGuestInfoButton">Sent Invitation</button>
+                            <p>wanna sent by tsv or csv?</p>
+
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">
+                                    ArrivalTime<span style={redStyle}>{'※'}</span>
+                                </label>
+                                <div className="col-sm-10">
+                                    <input type="text" name="dateOfVisit" onChange={this.handleChange} value={this.state.guest.dateOfVisit} className="form-control" />
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">
+                                    BulkForm<span style={redStyle}>{'※'}</span>
+                                </label>
+                                <div className="col-sm-10">
+                                    <textarea name="bulkContent" onChange={this.handleChange} value={this.state.bulkContent} className="form-control" rows={5} />
+                                </div>
+                            </div>
+
+
+                            <br />
+                            <button type="button" disabled={!this.state.isValidGuest} onClick={this.registerGuest} className="btn btn-lg btn-danger" id="updateGuestInfoButton">Sent Bulk Invitation</button>
+                            <p>wanna sent by tsv or csv?</p>
                         </div>
                     );
                 })()}
