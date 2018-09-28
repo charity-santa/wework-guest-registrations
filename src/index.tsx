@@ -109,15 +109,18 @@ class Index extends React.Component<{}, State>{
 
             this.setState({
                 guest: g,
-                notice: 'Completed sending invitation to ' + name
+                notice: 'Completed sending invitation to ' + name,
+                error: '', //flush, message
             })
         }).catch((_err) => {
             console.error(_err);
             this.setState({
-                error: 'Oops! Something went wrong...'
+                error: 'Oops! Something went wrong...',
+                notice: '', //flush, message
             })
         });
     }
+
     handleChange(e: any) {
         let guest = this.state.guest;
 
